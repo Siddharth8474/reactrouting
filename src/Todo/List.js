@@ -1,0 +1,57 @@
+import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+
+const List = () => {
+
+    const [list, setList] = useState(["An item","A second item","A third item","A fourth item","And a fifth one"])
+    const [input,setInput]=useState("");
+    const  navigate =useNavigate(); 
+  
+    const handlevalue=(Event)=>{
+       setInput(Event.target.value);
+    }
+
+    const handleclick=()=>{
+        setList([...list,input]);
+    }
+
+    const dlt=(index)=>{
+       const list1= list.slice(0,index) 
+       const list2 = list.slice(index+1)
+       setList([...list1,...list2]);
+    }
+
+    const edit=(index)=>{
+        //dynamic routing
+        navigate(`/todo/edit/${index}`)
+    }
+
+
+  return (
+    <div>
+        <div class="input-group flex-nowrap">
+    <span class="input-group-text" id="addon-wrapping">@</span>
+    <input type="text" class="form-control" placeholder="Username" onChange={handlevalue} aria-label="Username" aria-describedby="addon-wrapping" />
+  </div>
+  <button type="button" class="btn btn-primary" onClick={handleclick}>Todo</button>
+
+     <ul className="list-group">
+     {
+
+          list.map((ele,index)=>{
+            return <li className="list-group-item">{ele}
+             <button onClick={()=>dlt(index)}>Delete</button>
+             <button onClick={()=>edit(index)}>edit</button>
+            </li>
+          })
+
+     }
+
+     </ul>
+
+  </div>
+  
+  )
+}
+
+export default List
