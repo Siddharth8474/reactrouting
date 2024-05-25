@@ -24,22 +24,23 @@ const List = () => {
     const edit=(index)=>{
         //dynamic routing
         navigate(`/todo/edit/${index}`)
+        console.log(index);
     }
 
 
   return (
     <div>
-        <div class="input-group flex-nowrap">
-    <span class="input-group-text" id="addon-wrapping">@</span>
-    <input type="text" class="form-control" placeholder="Username" onChange={handlevalue} aria-label="Username" aria-describedby="addon-wrapping" />
+        <div className="input-group flex-nowrap">
+    <span className="input-group-text" id="addon-wrapping">@</span>
+    <input type="text" className="form-control" placeholder="Username" onChange={handlevalue} aria-label="Username" aria-describedby="addon-wrapping" />
   </div>
-  <button type="button" class="btn btn-primary" onClick={handleclick}>Todo</button>
+  <button type="button" className="btn btn-primary" onClick={handleclick}>Todo</button>
 
      <ul className="list-group">
      {
 
           list.map((ele,index)=>{
-            return <li className="list-group-item">{ele}
+            return <li className="list-group-item" key={index} >{ele}
              <button onClick={()=>dlt(index)}>Delete</button>
              <button onClick={()=>edit(index)}>edit</button>
             </li>
